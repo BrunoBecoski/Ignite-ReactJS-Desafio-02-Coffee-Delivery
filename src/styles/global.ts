@@ -25,4 +25,8 @@ export const GlobalStyle = createGlobalStyle`
     line-height: 130%;
     color: ${props => props.theme['base-title']};
   }
+
+  button {
+    cursor: pointer;
+  }
 `;
