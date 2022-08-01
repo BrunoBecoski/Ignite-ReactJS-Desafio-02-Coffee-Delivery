@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
 export const CoffeeListContainer = styled.div`
-  max-width: 1440px;
-  margin-inline: auto;
-  
-  padding-inline: 160px;
+
   padding-block: 2rem;
 
   h2 {

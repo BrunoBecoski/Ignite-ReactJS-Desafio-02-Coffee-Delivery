@@ -1,8 +1,16 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
 
-import { IntroContainer, Title, Items, ItemCard, ItemPackage, ItemTimer, ItemCoffee } from './styles';
+import { 
+  IntroContainer,
+  Title,
+  Items,
+  ItemCard,
+  ItemPackage,
+  ItemTimer,
+  ItemCoffee
+} from './styles';
 
-import coffeeImg from '../../assets/coffee.png';
+import coffeeImg from '../../../../assets/coffee.png';
 
 export function Intro() {
   return (
@@ -16,28 +24,28 @@ export function Intro() {
         <Items>
           <ItemCard>
             <span>
-              <ShoppingCart weight='fill' />
+              <ShoppingCart weight="fill" />
             </span>
             Compra simples e segura
           </ItemCard>
 
           <ItemPackage>
             <span>
-              <Package weight='fill' />
+              <Package weight="fill" />
             </span>
             Embalagem mantém o café intacto
           </ItemPackage>
 
           <ItemTimer>
             <span>
-              <Timer weight='fill' />
+              <Timer weight="fill" />
             </span>
             Entrega rápida e rastreada
           </ItemTimer>
 
           <ItemCoffee>
             <span>
-              <Coffee weight='fill' />
+              <Coffee weight="fill" />
             </span>
             O café chega fresquinho até você
           </ItemCoffee>

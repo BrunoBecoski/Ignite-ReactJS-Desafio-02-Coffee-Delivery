@@ -1,14 +1,9 @@
 import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
-  max-width: 1440px;
-  margin-inline: auto;
-  
-  padding-inline: 160px;
-  padding-block: 2.5rem;
-
   display: flex;
   justify-content: space-between;
+  padding-top: 6.25rem;
 
   h2 {
     font-size: 1.125rem;

@@ -10,20 +10,20 @@ import {
   CardCounter
 } from './styles';
 
-import expressoTradicionalImg from '../../assets/expresso_tradicional.png';
-import expressoAmericanoImg from '../../assets/expresso_americano.png';
-import expressoCremosoImg from '../../assets/expresso_cremoso.png';
-import expressoGeladoImg from '../../assets/expresso_gelado.png';
-import cafeComLeiteImg from '../../assets/cafe_com_leite.png';
-import latteImg from  '../../assets/latte.png';
-import capuccinoImg from  '../../assets/capuccino.png';
-import macchiatoImg from  '../../assets/macchiato.png';
-import mocaccinoImg from  '../../assets/mocaccino.png';
-import chocolateQuenteImg from  '../../assets/chocolate_quente.png';
-import cubanoImg from  '../../assets/cubano.png';
-import havaianoImg from  '../../assets/havaiano.png';
-import arabeImg from  '../../assets/arabe.png';
-import irlandesImg from  '../../assets/irlandes.png';
+import expressoTradicionalImg from '../../../../assets/expresso_tradicional.png';
+import expressoAmericanoImg from '../../../../assets/expresso_americano.png';
+import expressoCremosoImg from '../../../../assets/expresso_cremoso.png';
+import expressoGeladoImg from '../../../../assets/expresso_gelado.png';
+import cafeComLeiteImg from '../../../../assets/cafe_com_leite.png';
+import latteImg from  '../../../../assets/latte.png';
+import capuccinoImg from  '../../../../assets/capuccino.png';
+import macchiatoImg from  '../../../../assets/macchiato.png';
+import mocaccinoImg from  '../../../../assets/mocaccino.png';
+import chocolateQuenteImg from  '../../../../assets/chocolate_quente.png';
+import cubanoImg from  '../../../../assets/cubano.png';
+import havaianoImg from  '../../../../assets/havaiano.png';
+import arabeImg from  '../../../../assets/arabe.png';
+import irlandesImg from  '../../../../assets/irlandes.png';
 
 interface coffeeInfo {
   id: string;

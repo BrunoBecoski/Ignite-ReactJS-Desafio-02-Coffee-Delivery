@@ -1,23 +1,25 @@
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
-  max-width: 1440px;
-  margin-inline: auto;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding-inline: 160px;
-  padding-block: 32px;
+  position: fixed;
 
-  @media(max-width: 768px) {
-    padding: 1rem;
-  }
+  width: 1120px;
+  height: 6.25rem;
+
+  background: ${props => props.theme['background']};
 
   div {
     display: flex;
     gap: .75rem;
+  }
+
+  img {
+    height: 2.5rem;
   }
 `;
 
@@ -34,8 +36,10 @@ export const Location = styled.div`
   background: ${props => props.theme['purple-light']};
 `;
 
-export const Card = styled.div`
+export const Card = styled(NavLink)`
   position: relative;
+
+  display: flex;
   
   border: none;
   padding: .5rem;
@@ -58,7 +62,7 @@ export const Card = styled.div`
 
     font-size: .75rem;
     font-weight: 700;
-    color: ${props => props.theme.white};
+    color: ${props => props.theme['white']};
     background: ${props => props.theme['yellow-dark']};
   }
 `;

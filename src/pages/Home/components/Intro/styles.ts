@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 
-import backgroundImg from '../../assets/background.png';
+import backgroundImg from '../../../../assets/background.png';
 
 export const IntroContainer = styled.div`
-  max-width: 1440px;
-  margin-inline: auto;
-  
-  padding-inline: 160px;
-
-  @media(max-width: 768px) {
-    padding-inline: 1rem;
-  }
-
   display: flex;
   padding-block: 5.75rem;
-  background-image: url(${backgroundImg});
-
+  
+  background-image: url(${backgroundImg}); 
+  
   img {
     object-fit: cover;
     margin-left: 3.5rem;
