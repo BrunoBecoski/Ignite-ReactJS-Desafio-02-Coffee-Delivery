@@ -1,6 +1,11 @@
 import { Minus, Plus, Trash } from 'phosphor-react';
 
-import { CoffeeSelectedContainer } from './styles';
+import { 
+  CoffeeSelectedContainer, 
+  Details,
+  Actions, 
+  CardCounter
+} from './styles';
 
 interface CoffeeSelectedProps {
   coffee: {
@@ -16,11 +21,11 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
   return (
     <CoffeeSelectedContainer>
       <img src={img} />
-      <div>
-        <p>{name}</p>
+      <Details>
+        <span>{name}</span>
 
-        <div>
-          <div>
+        <Actions>
+          <CardCounter>
             <button>
               <Minus weight="bold" />
             </button>
@@ -30,22 +35,22 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
             <button>
               <Plus weight="bold" />
             </button>
-          </div>
+          </CardCounter>
 
           <button>
             <Trash />
             Remover
           </button>
-        </div>
-      </div>
+        </Actions>
+      </Details>
 
-      <p>
+      <span>
         {
           new Intl.NumberFormat(
             'pt-BR', { style: 'currency', currency: 'BRL' }
           ).format(price)
         }
-      </p>
+      </span>
     </CoffeeSelectedContainer>
   );
 }

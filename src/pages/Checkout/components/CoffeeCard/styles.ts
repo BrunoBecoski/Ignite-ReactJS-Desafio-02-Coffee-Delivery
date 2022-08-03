@@ -5,4 +5,6 @@ export const CoffeeCardContainer = styled.div`
 
   border-radius: 6px 44px;
   background: ${props => props.theme['base-card']};
+
+  max-width: 448px;
 `;
