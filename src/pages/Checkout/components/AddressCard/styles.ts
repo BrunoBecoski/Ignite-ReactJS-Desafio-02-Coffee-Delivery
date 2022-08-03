@@ -17,6 +17,10 @@ export const Title = styled.div`
 
   color: ${props => props.theme['yellow-dark']};
 
+  svg {
+    font-size: 1.375rem;
+  }
+
   div {
     color: ${props => props.theme['base-subtitle']};
 

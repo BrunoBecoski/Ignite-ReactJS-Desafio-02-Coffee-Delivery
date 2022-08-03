@@ -11,6 +11,8 @@ export const HeaderContainer = styled.header`
   width: 1120px;
   height: 6.25rem;
 
+  z-index: 100;
+
   background: ${props => props.theme['background']};
 
   div {

@@ -1,35 +1,43 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react';
 
-import { PaymentCardContainer } from './styles';
+import { PaymentCardContainer, Title, Form, Select } from './styles';
 
 export function PaymentCard() {
   return (
     <PaymentCardContainer>
-          <div className="header">
-            <CurrencyDollar />
-            <div>
-              <p>Pagamento</p>
-              <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
-            </div>
-          </div>
+      <Title>
+        <CurrencyDollar />
+        <div>
+          <p>Pagamento</p>
+          <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+        </div>
+      </Title>
 
+      <Form>
+        <Select>
+          <input type="radio" name="payment" />
           <div>
-            <div>
-              <input type="radio" name="payment" id="credit" />
-              <CreditCard />
-              <label htmlFor="credit">Cartão de Crédito</label>
-            </div>
-            <div>
-              <input type="radio" name="payment" id="debit"/>
-              <Bank />
-              <label htmlFor="debit">Cartão de Débito</label>
-            </div>
-            <div>
-              <input type="radio" name="payment" id="money"/>
-              <Money />
-              <label htmlFor="money" >Dinheiro</label>
-            </div>
+            <CreditCard />
+            Cartão de Crédito
+          </div>          
+        </Select>
+        
+        <Select>
+          <input type="radio" name="payment" />
+          <div>
+            <Bank />
+            Cartão de Débito
           </div>
-        </PaymentCardContainer>
+        </Select>
+        
+        <Select>
+          <input type="radio" name="payment" />
+          <div>
+            <Money />
+            Dinheiro
+          </div>
+        </Select>
+      </Form>
+    </PaymentCardContainer>
   );
 }
