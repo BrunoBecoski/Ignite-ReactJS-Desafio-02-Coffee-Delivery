@@ -1,4 +1,4 @@
-import { AdressCard } from './components/AdressCard';
+import { AddressCard } from './components/AddressCard';
 import { PaymentCard } from './components/PaymentCard';
 import { CoffeeCard } from './components/CoffeeCard';
 
@@ -12,7 +12,7 @@ export function Checkout() {
     <CheckoutContainer>
       <div>
         <h2>Complete seu pedido</h2>
-        <AdressCard />
+        <AddressCard />
         <PaymentCard />
       </div>
 
