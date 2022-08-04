@@ -48,6 +48,7 @@ export const Actions = styled.div`
     border-radius: 6px;
     font-size: .75rem;
     text-transform: uppercase;
+    color: ${props => props.theme['base-text']};
     background: ${props => props.theme['base-button']};
 
     svg {

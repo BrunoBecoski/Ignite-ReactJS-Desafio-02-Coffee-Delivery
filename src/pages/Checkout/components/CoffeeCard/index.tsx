@@ -1,6 +1,6 @@
 import { CoffeeSelected } from '../CoffeeSelected';
 
-import { CoffeeCardContainer } from './styles';
+import { CoffeeCardContainer, TotalPrice, Button } from './styles';
 
 import expressoTradicionalImg from '../../../../assets/expresso_tradicional.png';
 import latteImg from '../../../../assets/latte.png';
@@ -22,7 +22,6 @@ const coffeesListInfo = [
 
 export function CoffeeCard() {
   return (
-
     <CoffeeCardContainer>
       <div>
         {
@@ -30,9 +29,11 @@ export function CoffeeCard() {
             <CoffeeSelected key={coffee.id} coffee={coffee} />
           ))
         }
+      </div>
 
+      <TotalPrice>
         <div>
-          <p>Total de items</p>
+          <p>Total de itens</p>
           <span>R$ 29,70</span>
         </div>
         <div>
@@ -43,10 +44,11 @@ export function CoffeeCard() {
           <p>Total</p>
           <span>R$ 33,20</span>
         </div>
-        <button>
-          Confirmar pedido
-        </button>
-      </div>
+      </TotalPrice>
+      
+      <Button>
+        Confirmar pedido
+      </Button>
     </CoffeeCardContainer>
   );
 }
