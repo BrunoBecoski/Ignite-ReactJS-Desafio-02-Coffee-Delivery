@@ -1,31 +1,21 @@
-import { Minus, Plus, ShoppingCart } from 'phosphor-react';
+import { createContext, ReactNode } from 'react';
 
-import { 
-  CoffeeListContainer,
-  CoffeeCardContainer,
-  CardTags,
-  CardBuy,
-  CardPrice,
-  CardActions,
-  CardCounter
-} from './styles';
+import expressoTradicionalImg from '../assets/expresso_tradicional.png';
+import expressoAmericanoImg from '../assets/expresso_americano.png';
+import expressoCremosoImg from '../assets/expresso_cremoso.png';
+import expressoGeladoImg from '../assets/expresso_gelado.png';
+import cafeComLeiteImg from '../assets/cafe_com_leite.png';
+import latteImg from  '../assets/latte.png';
+import capuccinoImg from  '../assets/capuccino.png';
+import macchiatoImg from  '../assets/macchiato.png';
+import mocaccinoImg from  '../assets/mocaccino.png';
+import chocolateQuenteImg from  '../assets/chocolate_quente.png';
+import cubanoImg from  '../assets/cubano.png';
+import havaianoImg from  '../assets/havaiano.png';
+import arabeImg from  '../assets/arabe.png';
+import irlandesImg from  '../assets/irlandes.png';
 
-import expressoTradicionalImg from '../../../../assets/expresso_tradicional.png';
-import expressoAmericanoImg from '../../../../assets/expresso_americano.png';
-import expressoCremosoImg from '../../../../assets/expresso_cremoso.png';
-import expressoGeladoImg from '../../../../assets/expresso_gelado.png';
-import cafeComLeiteImg from '../../../../assets/cafe_com_leite.png';
-import latteImg from  '../../../../assets/latte.png';
-import capuccinoImg from  '../../../../assets/capuccino.png';
-import macchiatoImg from  '../../../../assets/macchiato.png';
-import mocaccinoImg from  '../../../../assets/mocaccino.png';
-import chocolateQuenteImg from  '../../../../assets/chocolate_quente.png';
-import cubanoImg from  '../../../../assets/cubano.png';
-import havaianoImg from  '../../../../assets/havaiano.png';
-import arabeImg from  '../../../../assets/arabe.png';
-import irlandesImg from  '../../../../assets/irlandes.png';
-
-interface coffeeInfo {
+export type CoffeeInfo = {
   id: string;
   img: string;
   tags: string[];
@@ -34,7 +24,17 @@ interface coffeeInfo {
   price: number;
 }
 
-const coffeesListInfo: coffeeInfo[] = [
+interface CoffeesListContextType {
+  coffeesList: CoffeeInfo[]
+}
+
+export const CoffeesListContext = createContext({} as CoffeesListContextType);
+
+interface CoffeesListContextProviderProps {
+  children: ReactNode;
+}
+
+const coffeesList: CoffeeInfo[] = [
   {
     id: '1',
     img: expressoTradicionalImg,
@@ -149,65 +149,14 @@ const coffeesListInfo: coffeeInfo[] = [
   }
 ]
 
-interface CoffeeCardPros {
-  coffee: coffeeInfo
-}
-
-function CoffeeCard({ coffee }: CoffeeCardPros) {
-  const { img, tags, name, description, price } = coffee;
+export function CoffeesListContextProvider({
+  children
+}: CoffeesListContextProviderProps) {
   return (
-    <CoffeeCardContainer>
-      <img src={img} />
-      <CardTags>
-        {tags.map(tag => <span>{tag}</span>)}
-      </CardTags>
-      <h3>{name}</h3>
-      <p>{description}</p>
-      <CardBuy>
-        <CardPrice>
-          <span>
-            R${' '}
-          </span>
-          {
-            new Intl.NumberFormat(
-              'pt-BR', { style: 'currency', currency: 'BRL' }
-            ).format(price).replace('R$', '')
-          }
-        </CardPrice>
-        <CardActions>
-          <CardCounter>
-            <button>
-              <Minus size={14} weight="bold" />
-            </button>
-            <span>1</span>
-            <button>
-              <Plus size={14} weight="bold" />
-            </button>
-          </CardCounter>
-          <button>
-            <ShoppingCart weight="fill" size={20} />
-          </button>
-        </CardActions>
-      </CardBuy>
-    </CoffeeCardContainer>
-  );
-}
-
-export function CoffeeList() {
-  return (
-    <CoffeeListContainer>
-      <h2>Nossos Cafés</h2>
-
-      <div>
-        {
-          coffeesListInfo.map(coffee => (
-            <CoffeeCard 
-              key={coffee.id}
-              coffee={coffee}
-            />
-          ))
-        }
-      </div>
-    </CoffeeListContainer>
+    <CoffeesListContext.Provider value={
+      { coffeesList }
+    }>
+      {children}
+    </CoffeesListContext.Provider>
   );
 }

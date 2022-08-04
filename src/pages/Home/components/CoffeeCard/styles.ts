@@ -1,24 +1,5 @@
 import styled from 'styled-components';
 
-export const CoffeeListContainer = styled.div`
-
-  padding-block: 2rem;
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  > div {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    margin-top: 54px;
-
-    gap: 2.5rem 2rem;
-  }
-`;
-
 export const CoffeeCardContainer = styled.div`
   display: flex;
   flex-direction: column;
