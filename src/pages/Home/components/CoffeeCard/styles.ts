@@ -8,8 +8,8 @@ export const CoffeeCardContainer = styled.div`
   width: 256px;
   padding: 0 1.25rem 1.25rem;
 
-  background: ${props => props.theme['base-card']};
   border-radius: 6px 36px;
+  background: ${props => props.theme['base-card']};
 
   img {
     margin-top: -20px;

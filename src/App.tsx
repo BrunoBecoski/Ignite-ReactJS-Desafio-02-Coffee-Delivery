@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { Router } from './Router';
 import { CoffeesListContextProvider } from './contexts/CoffeesListContext';
+import { OrderCartContextProvider } from './contexts/OrderCartContext';
 
 import { GlobalStyle } from './styles/global';
 import { defaultTheme } from './styles/themes/default';
@@ -12,7 +13,9 @@ export function App() {
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
         <CoffeesListContextProvider>
-          <Router />
+          <OrderCartContextProvider>
+            <Router />
+          </OrderCartContextProvider>
         </CoffeesListContextProvider>
       </BrowserRouter>
 

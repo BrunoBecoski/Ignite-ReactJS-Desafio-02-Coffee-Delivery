@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { Minus, Plus, ShoppingCart } from 'phosphor-react';
 
 import { CoffeeInfo } from '../../../../contexts/CoffeesListContext';
+import { OrderCartContext } from '../../../../contexts/OrderCartContext';
 
 import {  
   CoffeeCardContainer,
@@ -16,29 +18,31 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
-  const { img, tags, name, description, price } = coffee;
+  const { addCoffee } = useContext(OrderCartContext);
+
+  const formatPrice = new Intl.NumberFormat(
+      'pt-BR', { style: 'currency', currency: 'BRL' }
+    ).format(coffee.price).replace('R$', '');
+
+  function handleAddCoffee() {
+    addCoffee(coffee);
+  }
 
   return (
     <CoffeeCardContainer>
-      <img src={img} />
+      <img src={coffee.img} />
 
       <CardTags>
-        {tags.map(tag => <span>{tag}</span>)}
+        {coffee.tags.map(tag => <span key={tag}>{tag}</span>)}
       </CardTags>
 
-      <h3>{name}</h3>
-      <p>{description}</p>
+      <h3>{coffee.name}</h3>
+      <p>{coffee.description}</p>
 
       <CardBuy>
         <CardPrice>
-          <span>
-            R${' '}
-          </span>
-          {
-            new Intl.NumberFormat(
-              'pt-BR', { style: 'currency', currency: 'BRL' }
-            ).format(price).replace('R$', '')
-          }
+          <span>R${' '}</span>
+          {formatPrice}
         </CardPrice>
 
         <CardActions>
@@ -52,7 +56,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
             </button>
           </CardCounter>
           
-          <button>
+          <button onClick={handleAddCoffee}>
             <ShoppingCart weight="fill" size={20} />
           </button>
         </CardActions>
