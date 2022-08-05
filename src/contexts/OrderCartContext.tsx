@@ -1,8 +1,6 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 
-import { CoffeeInfo } from './CoffeesListContext';
-
-interface CartState {
+export type CoffeeInfoInCart = {
   id: string;
   img: string;
   name: string;
@@ -11,8 +9,10 @@ interface CartState {
 }
 
 interface OrderCartContextType {
-  cart: CartState[];
-  addCoffee: (coffeeSelected: CoffeeInfo) => void;
+  cart: CoffeeInfoInCart[];
+  addCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
+  incrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
+  decrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
 }
 
 export const OrderCartContext = createContext({} as OrderCartContextType);
@@ -24,9 +24,9 @@ interface OrderCartContextProviderProps {
 export function OrderCartContextProvider({
   children
 }: OrderCartContextProviderProps) {
-  const [cart, setCart] = useState<CartState[]>([]);
+  const [cart, setCart] = useState<CoffeeInfoInCart[]>([]);
 
-  function addCoffee(coffeeSelected: CoffeeInfo) {
+  function addCoffee(coffeeSelected: CoffeeInfoInCart) {
     const coffeeFind = cart.find(coffee => coffee.id === coffeeSelected.id);
 
     if(coffeeFind) {
@@ -46,24 +46,55 @@ export function OrderCartContextProvider({
       setCart(cardUpdated);
       
     } else {
-      const coffeeToAdd = {
-        id: coffeeSelected.id,
-        img: coffeeSelected.img,
-        name: coffeeSelected.name,
-        price: coffeeSelected.price,
-        quantity: 1
-      }
-
-      setCart(state => [...state, coffeeToAdd]);
+      setCart(state => [...state, coffeeSelected]);
     }
   }
 
-  useEffect(() => { console.log(JSON.stringify(cart, null, '  ')) }, [cart]);
+  function decrementCoffeeQuantity(coffeeSelected: CoffeeInfoInCart){
+    if(coffeeSelected.quantity === 1) {
+      return;
+
+    } else {
+      const coffeeToUpdate = {
+        ...coffeeSelected,
+        quantity: coffeeSelected.quantity - 1
+      }
+
+      const cardUpdated = cart.map(coffee => { 
+        if(coffee.id === coffeeSelected.id) {
+          return coffeeToUpdate;
+        } else {
+          return coffee;
+        }
+      });
+
+      setCart(cardUpdated);
+    }
+  }
+
+  function incrementCoffeeQuantity(coffeeSelected: CoffeeInfoInCart) {
+    const coffeeToUpdate = {
+      ...coffeeSelected,
+      quantity: coffeeSelected.quantity + 1
+    }
+
+    const cardUpdated = cart.map(coffee => { 
+      if(coffee.id === coffeeSelected.id) {
+        return coffeeToUpdate;
+      } else {
+        return coffee;
+      }
+    });
+
+    setCart(cardUpdated);
+  }
 
   return (
     <OrderCartContext.Provider value={{
       cart,
-      addCoffee
+      addCoffee,
+      incrementCoffeeQuantity,
+      decrementCoffeeQuantity
     }}>
       {children}
     </OrderCartContext.Provider>

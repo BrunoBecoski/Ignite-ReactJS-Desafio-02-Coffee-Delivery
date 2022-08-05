@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import { Minus, Plus, Trash } from 'phosphor-react';
+
+import { CoffeeInfoInCart, OrderCartContext } from '../../../../contexts/OrderCartContext';
 
 import { 
   CoffeeSelectedContainer, 
@@ -8,31 +11,39 @@ import {
 } from './styles';
 
 interface CoffeeSelectedProps {
-  coffee: {
-    img: string;
-    name: string;
-    price: number;
-  }
+  coffee: CoffeeInfoInCart;
 }
 
 export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
-  const { img, name, price } = coffee;
+  const { decrementCoffeeQuantity, incrementCoffeeQuantity } = useContext(OrderCartContext);
+
+  const formatPrice = new Intl.NumberFormat(
+      'pt-BR', { style: 'currency', currency: 'BRL' }
+    ).format(coffee.price)
+
+  function handleDecrementCoffeeQuantity() {
+    decrementCoffeeQuantity(coffee);
+  }
+
+  function handleIncrementCoffeeQuantity() {
+    incrementCoffeeQuantity(coffee);
+  }
 
   return (
     <CoffeeSelectedContainer>
-      <img src={img} />
+      <img src={coffee.img} />
       <Details>
-        <span>{name}</span>
+        <span>{coffee.name}</span>
 
         <Actions>
           <CardCounter>
-            <button>
+            <button onClick={handleDecrementCoffeeQuantity}>
               <Minus weight="bold" />
             </button>
             <span>
-              1
+              {coffee.quantity}
             </span>
-            <button>
+            <button onClick={handleIncrementCoffeeQuantity}>
               <Plus weight="bold" />
             </button>
           </CardCounter>
@@ -44,13 +55,7 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
         </Actions>
       </Details>
 
-      <span>
-        {
-          new Intl.NumberFormat(
-            'pt-BR', { style: 'currency', currency: 'BRL' }
-          ).format(price)
-        }
-      </span>
+      <span>{formatPrice}</span>
     </CoffeeSelectedContainer>
   );
 }

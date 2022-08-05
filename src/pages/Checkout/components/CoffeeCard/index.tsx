@@ -1,31 +1,19 @@
+import { useContext } from 'react';
+
+import { OrderCartContext } from '../../../../contexts/OrderCartContext';
+
 import { CoffeeSelected } from '../CoffeeSelected';
 
 import { CoffeeCardContainer, TotalPrice, Button } from './styles';
 
-import expressoTradicionalImg from '../../../../assets/expresso_tradicional.png';
-import latteImg from '../../../../assets/latte.png';
-
-const coffeesListInfo = [
-  {
-    id: '1',
-    img: expressoTradicionalImg,
-    name: 'Expresso Tradicional',
-    price: 9.90
-  },
-  {
-    id: '2',
-    img: latteImg,
-    name: 'Latte',
-    price: 19.80
-  }
-]
-
 export function CoffeeCard() {
+  const { cart } = useContext(OrderCartContext);
+
   return (
     <CoffeeCardContainer>
       <div>
         {
-          coffeesListInfo.map(coffee => (
+          cart.map(coffee => (
             <CoffeeSelected key={coffee.id} coffee={coffee} />
           ))
         }

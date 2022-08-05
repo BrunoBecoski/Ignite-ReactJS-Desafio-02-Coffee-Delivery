@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Minus, Plus, ShoppingCart } from 'phosphor-react';
 
 import { CoffeeInfo } from '../../../../contexts/CoffeesListContext';
@@ -20,12 +20,29 @@ interface CoffeeCardProps {
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const { addCoffee } = useContext(OrderCartContext);
 
+  const [quantity, setQuantity] = useState(1);
+
   const formatPrice = new Intl.NumberFormat(
       'pt-BR', { style: 'currency', currency: 'BRL' }
     ).format(coffee.price).replace('R$', '');
 
   function handleAddCoffee() {
-    addCoffee(coffee);
+    addCoffee({
+      ...coffee,
+      quantity,
+    });
+  }
+
+  function handleDecrementQuantity() {
+    if(quantity === 1) {
+      return;
+    } else {
+      setQuantity(state => state - 1);
+    }
+  }
+
+  function handleIncrementQuantity() {
+    setQuantity(state => state + 1);
   }
 
   return (
@@ -47,11 +64,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
         <CardActions>
           <CardCounter>
-            <button>
+            <button onClick={handleDecrementQuantity}>
               <Minus size={14} weight="bold" />
             </button>
-            <span>1</span>
-            <button>
+            <span>{quantity}</span>
+            <button onClick={handleIncrementQuantity}>
               <Plus size={14} weight="bold" />
             </button>
           </CardCounter>
