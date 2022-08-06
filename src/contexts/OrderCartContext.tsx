@@ -13,6 +13,7 @@ interface OrderCartContextType {
   addCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
   incrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
   decrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
+  removeCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
 }
 
 export const OrderCartContext = createContext({} as OrderCartContextType);
@@ -30,20 +31,15 @@ export function OrderCartContextProvider({
     const coffeeFind = cart.find(coffee => coffee.id === coffeeSelected.id);
 
     if(coffeeFind) {
-      const coffeeToUpdate = {
-        ...coffeeFind,
-        quantity: coffeeFind.quantity + 1
-      }
-
-      const cardUpdated = cart.map(coffee => { 
+      const updatedCart = cart.map(coffee => { 
         if(coffee.id === coffeeSelected.id) {
-          return coffeeToUpdate;
+          return coffeeSelected;
         } else {
           return coffee;
         }
       });
 
-      setCart(cardUpdated);
+      setCart(updatedCart);
       
     } else {
       setCart(state => [...state, coffeeSelected]);
@@ -60,7 +56,7 @@ export function OrderCartContextProvider({
         quantity: coffeeSelected.quantity - 1
       }
 
-      const cardUpdated = cart.map(coffee => { 
+      const updatedCart = cart.map(coffee => { 
         if(coffee.id === coffeeSelected.id) {
           return coffeeToUpdate;
         } else {
@@ -68,7 +64,7 @@ export function OrderCartContextProvider({
         }
       });
 
-      setCart(cardUpdated);
+      setCart(updatedCart);
     }
   }
 
@@ -78,7 +74,7 @@ export function OrderCartContextProvider({
       quantity: coffeeSelected.quantity + 1
     }
 
-    const cardUpdated = cart.map(coffee => { 
+    const updatedCart = cart.map(coffee => { 
       if(coffee.id === coffeeSelected.id) {
         return coffeeToUpdate;
       } else {
@@ -86,7 +82,13 @@ export function OrderCartContextProvider({
       }
     });
 
-    setCart(cardUpdated);
+    setCart(updatedCart);
+  }
+
+  function removeCoffee(coffeeSelected: CoffeeInfoInCart) {
+    const updatedCart = cart.filter(coffee => coffee.id !== coffeeSelected.id);
+
+    setCart(updatedCart);
   }
 
   return (
@@ -94,7 +96,8 @@ export function OrderCartContextProvider({
       cart,
       addCoffee,
       incrementCoffeeQuantity,
-      decrementCoffeeQuantity
+      decrementCoffeeQuantity,
+      removeCoffee
     }}>
       {children}
     </OrderCartContext.Provider>

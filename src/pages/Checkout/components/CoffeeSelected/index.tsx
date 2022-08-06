@@ -15,7 +15,11 @@ interface CoffeeSelectedProps {
 }
 
 export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
-  const { decrementCoffeeQuantity, incrementCoffeeQuantity } = useContext(OrderCartContext);
+  const { 
+    decrementCoffeeQuantity,
+    incrementCoffeeQuantity,
+    removeCoffee
+  } = useContext(OrderCartContext);
 
   const formatPrice = new Intl.NumberFormat(
       'pt-BR', { style: 'currency', currency: 'BRL' }
@@ -27,6 +31,10 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
 
   function handleIncrementCoffeeQuantity() {
     incrementCoffeeQuantity(coffee);
+  }
+
+  function handleRemoveCoffee() {
+    removeCoffee(coffee);
   }
 
   return (
@@ -48,7 +56,7 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
             </button>
           </CardCounter>
 
-          <button>
+          <button onClick={handleRemoveCoffee}>
             <Trash />
             Remover
           </button>
