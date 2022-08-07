@@ -45,18 +45,18 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
 
         <Actions>
           <CardCounter>
-            <button onClick={handleDecrementCoffeeQuantity}>
+            <button type="button" onClick={handleDecrementCoffeeQuantity}>
               <Minus weight="bold" />
             </button>
             <span>
               {coffee.quantity}
             </span>
-            <button onClick={handleIncrementCoffeeQuantity}>
+            <button type="button" onClick={handleIncrementCoffeeQuantity}>
               <Plus weight="bold" />
             </button>
           </CardCounter>
 
-          <button onClick={handleRemoveCoffee}>
+          <button type="button" onClick={handleRemoveCoffee}>
             <Trash />
             Remover
           </button>

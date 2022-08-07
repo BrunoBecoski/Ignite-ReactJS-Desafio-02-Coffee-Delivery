@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { MapPin, ShoppingCart } from 'phosphor-react';
 
 import { OrderCartContext } from '../../contexts/OrderCartContext';
@@ -9,9 +9,19 @@ import { HeaderContainer, Location, Card } from './styles';
 import logoImg from '../../assets/logo.svg';
 
 export function Header() {
-  const { cart } = useContext(OrderCartContext);
+  const { cart, form } = useContext(OrderCartContext);
+  const navigate = useNavigate()
 
   const coffeeQuantity = cart.length;
+  const location = `${form.city}, ${form.state}`;
+
+  function handleRedirect() {
+    if (cart.length) {
+      navigate('/checkout');
+    } else {
+      alert('Selecione algum café');
+    }
+  }  
 
   return (
     <HeaderContainer>
@@ -22,10 +32,13 @@ export function Header() {
         <div className="this">
           <Location>
             <MapPin weight="fill" size={22} />
-            Porto Alegre, RS
+            {
+              form.city &&
+              location
+            }
           </Location>
 
-          <Card to="/checkout" >
+          <Card onClick={handleRedirect} >
             { !!coffeeQuantity &&
               <span>{coffeeQuantity}</span>
             }

@@ -20,21 +20,24 @@ export function AddressCard() {
         <Label id="postal_code">
           <input 
             placeholder="CEP"
-            {...register('postal_code', { required: true })}  
+            {...register('postal_code')}
+            required
           />
         </Label>
 
         <Label id="street_name">
           <input 
             placeholder="Rua"
-            {...register('street_name', { required: true })}  
+            {...register('street_name')}
+            required 
           />
         </Label>
 
         <Label id="number">
           <input
             placeholder="Número"
-            {...register('number', { required: true })}
+            {...register('number')}
+            required
           />
         </Label>
 
@@ -49,21 +52,24 @@ export function AddressCard() {
         <Label id="neighborhood">
           <input
             placeholder="Bairro"
-            {...register('neighborhood', { required: true })}
+            {...register('neighborhood')}
+            required
           />
         </Label>
 
         <Label id="city">
           <input
             placeholder="Cidade"
-            {...register('city', { required: true })}
+            {...register('city')}
+            required
           />
         </Label>
 
         <Label id="state">
           <input
             placeholder="UF"
-            {...register('state', { required: true })}
+            {...register('state')}
+            required
           />
         </Label>
       </Form>

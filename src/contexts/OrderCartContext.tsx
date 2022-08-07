@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export type CoffeeInfoInCart = {
   id: string;
@@ -8,7 +9,7 @@ export type CoffeeInfoInCart = {
   quantity: number;
 }
 
-interface FormProps {
+export type FormData = {
   postal_code: string;
   street_name: string;
   number: string;
@@ -19,14 +20,21 @@ interface FormProps {
   payment: 'credit' | 'debit' | 'money';
 }
 
+interface PriceData {
+  coffeePrice: number;
+  deliveryPrice: number;
+  totalPrice: number;
+}
+
 interface OrderCartContextType {
   cart: CoffeeInfoInCart[];
   addCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
   incrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
   decrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
   removeCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
-  fillOutForm: (data: FormProps) => void;
-  form: FormProps;
+  submitForm: (data: FormData) => void;
+  form: FormData;
+  price: PriceData;
 }
 
 export const OrderCartContext = createContext({} as OrderCartContextType);
@@ -39,8 +47,10 @@ export function OrderCartContextProvider({
   children
 }: OrderCartContextProviderProps) {
   const [cart, setCart] = useState<CoffeeInfoInCart[]>([]);
-  const [form, setForm] = useState({} as FormProps);
+  const [form, setForm] = useState({} as FormData);
+  const [price, setPrice] = useState({} as PriceData);
 
+  const navigate = useNavigate();
 
   function addCoffee(coffeeSelected: CoffeeInfoInCart) {
     const coffeeFind = cart.find(coffee => coffee.id === coffeeSelected.id);
@@ -106,13 +116,32 @@ export function OrderCartContextProvider({
     setCart(updatedCart);
   }
 
-  function fillOutForm(data: FormProps) {
-    setForm(data);
+  function submitForm(data: FormData) {
+    if (cart.length) {
+      setForm(data);
+      navigate('/success');
+    } else {
+      alert('Selecione algum café');
+    }
   }
 
   useEffect(() => {
-    console.log(JSON.stringify(form, null, '  '));
-  }, [form]); 
+    const coffeePrice = cart.reduce((acc, coffee) => {
+      const totalCoffeePrice = coffee.price * coffee.quantity;
+      return acc + totalCoffeePrice;
+    }, 0);
+    
+    const deliveryPrice = 3.50;
+
+    const totalPrice = coffeePrice + deliveryPrice;
+  
+    setPrice({
+      coffeePrice,
+      deliveryPrice,
+      totalPrice
+    })
+
+  }, [cart]);
 
   return (
     <OrderCartContext.Provider value={{
@@ -121,8 +150,9 @@ export function OrderCartContextProvider({
       incrementCoffeeQuantity,
       decrementCoffeeQuantity,
       removeCoffee,
-      fillOutForm,
-      form
+      submitForm,
+      form,
+      price
     }}>
       {children}
     </OrderCartContext.Provider>

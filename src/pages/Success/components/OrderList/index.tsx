@@ -11,7 +11,7 @@ import {
 } from './styles';
 
 export function OrderInfo() {
-  const { form } = useContext(OrderCartContext);
+  const { form, price } = useContext(OrderCartContext);
 
   function paymentFormatted() {
     switch (form.payment) {
@@ -25,6 +25,10 @@ export function OrderInfo() {
         return 'Dinheiro'
     }
   }
+
+  const formattedTotalPrice = new Intl.NumberFormat(
+    'pt-BR', { style: 'currency', currency: 'BRL' }
+  ).format(price.totalPrice);
 
   return (
     <OrderInfoContainer>
@@ -56,7 +60,7 @@ export function OrderInfo() {
           </div>
           <div>
             <p>Pagamento na entrega</p>
-            <strong>{paymentFormatted()}</strong>
+            <strong>{formattedTotalPrice + ' - ' + paymentFormatted()}</strong>
           </div>
         </PaymentInfo>
       </div>

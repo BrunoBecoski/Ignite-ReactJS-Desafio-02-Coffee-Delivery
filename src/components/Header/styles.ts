@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
   display: flex;
@@ -38,7 +37,7 @@ export const Location = styled.div`
   background: ${props => props.theme['purple-light']};
 `;
 
-export const Card = styled(NavLink)`
+export const Card = styled.button`
   position: relative;
 
   display: flex;

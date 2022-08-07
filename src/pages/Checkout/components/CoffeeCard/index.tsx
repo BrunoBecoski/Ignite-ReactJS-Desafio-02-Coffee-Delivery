@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { OrderCartContext } from '../../../../contexts/OrderCartContext';
 
@@ -7,40 +6,20 @@ import { CoffeeSelected } from '../CoffeeSelected';
 
 import { CoffeeCardContainer, TotalPrice, Button } from './styles';
 
-interface CoffeeCardProps {
-  submit: () => void;
-}
-
-export function CoffeeCard({ submit }: CoffeeCardProps) {
-  const { cart } = useContext(OrderCartContext);
-
-  const navigate = useNavigate();
-
-  const coffeePrice = cart.reduce((acc, coffee) => {
-    const totalCoffeePrice = coffee.price * coffee.quantity;
-    return acc + totalCoffeePrice;
-  }, 0)
-
-  const deliveryPrice = 3.50;
-  
-  const totalPrice = coffeePrice + deliveryPrice;
+export function CoffeeCard() {
+  const { cart, price } = useContext(OrderCartContext);
 
   const formattedCoffeePrice = new Intl.NumberFormat(
     'pt-BR', { style: 'currency', currency: 'BRL' }
-  ).format(coffeePrice);
+  ).format(price.coffeePrice);
 
   const formattedDeliveryPrice = new Intl.NumberFormat(
     'pt-BR', { style: 'currency', currency: 'BRL' }
-  ).format(deliveryPrice);
+  ).format(price.deliveryPrice);
 
   const formattedTotalPrice = new Intl.NumberFormat(
     'pt-BR', { style: 'currency', currency: 'BRL' }
-  ).format(totalPrice);
-
-  function handleSubmit() {
-    submit();
-    navigate('/success')
-  }
+  ).format(price.totalPrice);
 
   return (
     <CoffeeCardContainer>
@@ -67,7 +46,7 @@ export function CoffeeCard({ submit }: CoffeeCardProps) {
         </div>
       </TotalPrice>
       
-      <Button onClick={handleSubmit}>
+      <Button type="submit">
         Confirmar pedido
       </Button>
     </CoffeeCardContainer>

@@ -23,6 +23,7 @@ export function PaymentCard() {
             type="radio"
             name="payment"
             value="credit"
+            defaultChecked
           />
           <div>
             <CreditCard />
