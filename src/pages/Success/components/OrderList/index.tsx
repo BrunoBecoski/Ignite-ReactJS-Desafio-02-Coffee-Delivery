@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
+
+import { OrderCartContext } from '../../../../contexts/OrderCartContext';
 
 import {
   OrderInfoContainer,
@@ -8,6 +11,21 @@ import {
 } from './styles';
 
 export function OrderInfo() {
+  const { form } = useContext(OrderCartContext);
+
+  function paymentFormatted() {
+    switch (form.payment) {
+      case 'credit':
+        return 'Cartão de Crédito'
+      
+      case 'debit':
+        return 'Cartão de Débito'
+        
+      case 'money':
+        return 'Dinheiro'
+    }
+  }
+
   return (
     <OrderInfoContainer>
       <div>
@@ -17,8 +35,8 @@ export function OrderInfo() {
           </div>
           <div>
             <p>Entrega em </p>
-            <strong>Rua João Daniel Martinelli, 102</strong>
-            <span>Farrapos - Porto Alegre, RS</span>
+            <strong>Rua {form.street_name}, {form.number}</strong>
+            <span>{form.neighborhood} - {form.city}, {form.state}</span>
           </div>
         </AddressInfo>
 
@@ -38,7 +56,7 @@ export function OrderInfo() {
           </div>
           <div>
             <p>Pagamento na entrega</p>
-            <strong>Cartão de Crédito</strong>
+            <strong>{paymentFormatted()}</strong>
           </div>
         </PaymentInfo>
       </div>

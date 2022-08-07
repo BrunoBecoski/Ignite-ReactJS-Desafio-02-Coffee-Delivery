@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 
 export type CoffeeInfoInCart = {
   id: string;
@@ -8,12 +8,25 @@ export type CoffeeInfoInCart = {
   quantity: number;
 }
 
+interface FormProps {
+  postal_code: string;
+  street_name: string;
+  number: string;
+  complement?: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  payment: 'credit' | 'debit' | 'money';
+}
+
 interface OrderCartContextType {
   cart: CoffeeInfoInCart[];
   addCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
   incrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
   decrementCoffeeQuantity: (coffee: CoffeeInfoInCart) => void;
   removeCoffee: (coffeeSelected: CoffeeInfoInCart) => void;
+  fillOutForm: (data: FormProps) => void;
+  form: FormProps;
 }
 
 export const OrderCartContext = createContext({} as OrderCartContextType);
@@ -26,6 +39,8 @@ export function OrderCartContextProvider({
   children
 }: OrderCartContextProviderProps) {
   const [cart, setCart] = useState<CoffeeInfoInCart[]>([]);
+  const [form, setForm] = useState({} as FormProps);
+
 
   function addCoffee(coffeeSelected: CoffeeInfoInCart) {
     const coffeeFind = cart.find(coffee => coffee.id === coffeeSelected.id);
@@ -91,13 +106,23 @@ export function OrderCartContextProvider({
     setCart(updatedCart);
   }
 
+  function fillOutForm(data: FormProps) {
+    setForm(data);
+  }
+
+  useEffect(() => {
+    console.log(JSON.stringify(form, null, '  '));
+  }, [form]); 
+
   return (
     <OrderCartContext.Provider value={{
       cart,
       addCoffee,
       incrementCoffeeQuantity,
       decrementCoffeeQuantity,
-      removeCoffee
+      removeCoffee,
+      fillOutForm,
+      form
     }}>
       {children}
     </OrderCartContext.Provider>
