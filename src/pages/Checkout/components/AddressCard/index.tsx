@@ -1,9 +1,13 @@
-import { MapPinLine } from 'phosphor-react';
+import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { MapPinLine } from 'phosphor-react';
+
+import { OrderCartContext } from '../../../../contexts/OrderCartContext';
 
 import { AddressCardContainer, Title, Form, Label } from './styles';
 
 export function AddressCard() {
+  const { form } = useContext(OrderCartContext);
   const { register } = useFormContext();
 
   return (
@@ -22,6 +26,7 @@ export function AddressCard() {
             placeholder="CEP"
             {...register('postal_code')}
             required
+            defaultValue={form.postal_code}
           />
         </Label>
 
@@ -30,6 +35,7 @@ export function AddressCard() {
             placeholder="Rua"
             {...register('street_name')}
             required 
+            defaultValue={form.street_name}
           />
         </Label>
 
@@ -38,13 +44,15 @@ export function AddressCard() {
             placeholder="Número"
             {...register('number')}
             required
+            defaultValue={form.number}
           />
         </Label>
 
         <Label id="complement">
           <input
             placeholder="Complemento"
-            {...register('complement')}  
+            {...register('complement')}
+            defaultValue={form.complement}
           />
           <span>Opcional</span>
         </Label>
@@ -54,6 +62,7 @@ export function AddressCard() {
             placeholder="Bairro"
             {...register('neighborhood')}
             required
+            defaultValue={form.neighborhood}
           />
         </Label>
 
@@ -62,6 +71,7 @@ export function AddressCard() {
             placeholder="Cidade"
             {...register('city')}
             required
+            defaultValue={form.city}
           />
         </Label>
 
@@ -70,6 +80,7 @@ export function AddressCard() {
             placeholder="UF"
             {...register('state')}
             required
+            defaultValue={form.state}
           />
         </Label>
       </Form>

@@ -47,7 +47,14 @@ export function OrderCartContextProvider({
   children
 }: OrderCartContextProviderProps) {
   const [cart, setCart] = useState<CoffeeInfoInCart[]>([]);
-  const [form, setForm] = useState({} as FormData);
+  const [form, setForm] = useState<FormData>(() => {
+    const storedAddressAsJSON = localStorage.getItem('@coffee-delivery:form-data')
+    if (storedAddressAsJSON) {
+      return JSON.parse(storedAddressAsJSON)
+    } 
+    return {}
+    }
+  );
   const [price, setPrice] = useState({} as PriceData);
 
   const navigate = useNavigate();
@@ -119,6 +126,11 @@ export function OrderCartContextProvider({
   function submitForm(data: FormData) {
     if (cart.length) {
       setForm(data);
+      
+      localStorage.setItem('@coffee-delivery:form-data', JSON.stringify(data));
+      
+      setCart([]);
+      
       navigate('/success');
     } else {
       alert('Selecione algum café');

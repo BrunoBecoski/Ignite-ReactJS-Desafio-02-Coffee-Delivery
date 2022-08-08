@@ -1,9 +1,13 @@
-import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react';
+import { useContext } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react';
+
+import { OrderCartContext } from '../../../../contexts/OrderCartContext';
 
 import { PaymentCardContainer, Title, Form, Select } from './styles';
 
 export function PaymentCard() {
+  const { form } = useContext(OrderCartContext);
   const { register } = useFormContext();
 
   return (
@@ -37,6 +41,7 @@ export function PaymentCard() {
             type="radio"
             name="payment"
             value="debit"
+            defaultChecked={form.payment === 'debit'}
           />
           <div>
             <Bank />
@@ -50,6 +55,7 @@ export function PaymentCard() {
             type="radio"
             name="payment"
             value="money"
+            defaultChecked={form.payment === 'money'}
           />
           <div>
             <Money />
