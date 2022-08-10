@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import { FormProvider, Resolver, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { FormData, OrderCartContext } from '../../contexts/OrderCartContext';
+import { OrderCartContext } from '../../contexts/OrderCartContext';
 
 import { AddressCard } from './components/AddressCard';
 import { PaymentCard } from './components/PaymentCard';
@@ -11,14 +11,13 @@ import {
   CheckoutContainer,
 } from './styles';
 
-
 export function Checkout() {
-  const { submitForm } = useContext(OrderCartContext);
+  const { updateForm } = useContext(OrderCartContext);
   const checkoutForm = useForm();
   const { handleSubmit } = checkoutForm;
 
   function submit(data: any) {
-    submitForm(data);
+    updateForm(data);
   }
 
   return (

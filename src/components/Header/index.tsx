@@ -16,7 +16,7 @@ export function Header() {
   const location = `${form.city}, ${form.state}`;
 
   function handleRedirect() {
-    if (cart.length) {
+    if (coffeeQuantity) {
       navigate('/checkout');
     } else {
       alert('Selecione algum café');

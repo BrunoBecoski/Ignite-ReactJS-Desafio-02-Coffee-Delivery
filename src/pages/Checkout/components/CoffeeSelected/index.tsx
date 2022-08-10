@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Minus, Plus, Trash } from 'phosphor-react';
 
-import { CoffeeInfoInCart, OrderCartContext } from '../../../../contexts/OrderCartContext';
+import { OrderCartContext, CoffeeData } from '../../../../contexts/OrderCartContext';
 
 import { 
   CoffeeSelectedContainer, 
@@ -11,26 +11,26 @@ import {
 } from './styles';
 
 interface CoffeeSelectedProps {
-  coffee: CoffeeInfoInCart;
+  coffee: CoffeeData;
 }
 
 export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
   const { 
-    decrementCoffeeQuantity,
-    incrementCoffeeQuantity,
-    removeCoffee
+    removeCoffee,
+    incrementCoffee,
+    decrementCoffee,
   } = useContext(OrderCartContext);
 
   const formatPrice = new Intl.NumberFormat(
       'pt-BR', { style: 'currency', currency: 'BRL' }
     ).format(coffee.price)
 
-  function handleDecrementCoffeeQuantity() {
-    decrementCoffeeQuantity(coffee);
+  function handleIncrementCoffee() {
+    incrementCoffee(coffee);
   }
-
-  function handleIncrementCoffeeQuantity() {
-    incrementCoffeeQuantity(coffee);
+  
+  function handleDecrementCoffee() {
+    decrementCoffee(coffee);
   }
 
   function handleRemoveCoffee() {
@@ -45,13 +45,13 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
 
         <Actions>
           <CardCounter>
-            <button type="button" onClick={handleDecrementCoffeeQuantity}>
+            <button type="button" onClick={handleDecrementCoffee}>
               <Minus weight="bold" />
             </button>
             <span>
               {coffee.quantity}
             </span>
-            <button type="button" onClick={handleIncrementCoffeeQuantity}>
+            <button type="button" onClick={handleIncrementCoffee}>
               <Plus weight="bold" />
             </button>
           </CardCounter>
