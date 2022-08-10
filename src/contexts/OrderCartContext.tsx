@@ -1,6 +1,16 @@
 import { createContext, ReactNode, useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { orderReducer } from '../reducers/order/reducer';
+import {
+  addCoffeAction,
+  removeCoffeeAction,
+  incrementCoffeeAction,
+  decrementCoffeeAction,
+  updatePriceAction,
+  updateFormAction
+} from '../reducers/order/actions';
+
 export type CoffeeData = {
   id: string;
   img: string;
@@ -9,7 +19,7 @@ export type CoffeeData = {
   quantity: number;
 }
 
-type FormData = {
+export type FormData = {
   postal_code: string;
   street_name: string;
   number: string;
@@ -20,7 +30,7 @@ type FormData = {
   payment: 'credit' | 'debit' | 'money';
 }
 
-type PriceData = {
+export type PriceData = {
   coffeePrice: number;
   deliveryPrice: number;
   totalPrice: number;
@@ -43,114 +53,12 @@ interface OrderCartContextProviderProps {
   children: ReactNode;
 }
 
-interface OrderState {
-  cart: CoffeeData[];
-  price: PriceData;
-  form: FormData;
-}
-
 export function OrderCartContextProvider({
   children
 }: OrderCartContextProviderProps) {
   const [orderState, dispath] = useReducer(
-    (state: OrderState, action: any) => {
-      switch (action.type) {
-
-        case 'ADD_COFFEE': {
-          const coffeeFind = state.cart.find(coffee => coffee.id === action.payload.id);
-
-          if (coffeeFind) {
-            const updatedCart = state.cart.map(coffee => {
-              if (coffee.id === action.payload.id) {
-                return action.payload;
-              } else {
-                return coffee;
-              }
-            });
-
-            return ({
-              ...state,
-              cart: updatedCart
-            });
-          } else {
-            return ({
-              ...state,
-              cart: [...state.cart, action.payload]
-            });
-          }
-        }
-
-        case 'REMOVE_COFFEE': {
-          const updatedCart = state.cart.filter(coffee => coffee.id !== action.payload.id);
-          return ({
-            ...state,
-            cart: updatedCart
-          });
-        }
-
-        case 'INCREMENT_COFFEE': {
-          const coffeeToUpdate = {
-            ...action.payload,
-            quantity: action.payload.quantity + 1
-          }
-
-          const updatedCart = state.cart.map(coffee => {
-            if (coffee.id === action.payload.id) {
-              return coffeeToUpdate;
-            } else {
-              return coffee;
-            }
-          });
-
-          return ({
-            ...state,
-            cart: updatedCart
-          });
-        }
-
-        case 'DECREMENT_COFFEE': {
-          const coffeeToUpdate = {
-            ...action.payload,
-            quantity: action.payload.quantity - 1
-          }
-
-          const updatedCart = state.cart.map(coffee => {
-            if (coffee.id === action.payload.id) {
-              return coffeeToUpdate;
-            } else {
-              return coffee;
-            }
-          });
-
-          return ({
-            ...state,
-            cart: updatedCart
-          });
-        }
-
-        case 'UPDATE_PRICE': {
-          return ({
-            ...state,
-            price: {
-              ...action.payload
-            }
-          });
-        }
-
-        case 'UPDATE_FORM': {
-          return ({
-            ...state,
-            cart: [],
-            form: {
-              ...action.payload
-            }
-          })
-        }
-
-        default:
-          return state
-      }
-    }, {
+    orderReducer,
+    {
       cart: [] as CoffeeData[],
       price: {} as PriceData,
       form: {} as FormData
@@ -181,30 +89,15 @@ export function OrderCartContextProvider({
   const navigate = useNavigate();
 
   function addCoffee(coffeeSelected: CoffeeData) {
-    dispath({
-      type: 'ADD_COFFEE',
-      payload: {
-        ...coffeeSelected
-      }
-    });
+    dispath(addCoffeAction(coffeeSelected));
   }
 
   function removeCoffee(coffeeSelected: CoffeeData) {
-    dispath({
-      type: 'REMOVE_COFFEE',
-      payload: {
-        ...coffeeSelected
-      }
-    });
+    dispath(removeCoffeeAction(coffeeSelected));
   }
 
   function incrementCoffee(coffeeSelected: CoffeeData) {
-    dispath({
-      type: 'INCREMENT_COFFEE',
-      payload: {
-        ...coffeeSelected
-      }
-    });
+    dispath(incrementCoffeeAction(coffeeSelected));
   }
 
   function decrementCoffee(coffeeSelected: CoffeeData) {
@@ -212,47 +105,20 @@ export function OrderCartContextProvider({
       return;
     }
 
-    dispath({
-      type: 'DECREMENT_COFFEE',
-      payload: {
-        ...coffeeSelected
-      }
-    });
+    dispath(decrementCoffeeAction(coffeeSelected));
   }
 
   function updatePrice() {
-    // @ts-ignore
-    const coffeePrice = cart.reduce((acc, coffee) => {
-      const totalCoffeePrice = coffee.price * coffee.quantity;
-      return acc + totalCoffeePrice;
-    }, 0);
-
-    const deliveryPrice = 3.50;
-
-    const totalPrice = coffeePrice + deliveryPrice;
-
-    dispath({
-      type: 'UPDATE_PRICE',
-      payload: {
-        coffeePrice,
-        deliveryPrice,
-        totalPrice
-      }
-    });
+    dispath(updatePriceAction());
   }
 
-  function updateForm(data: FormData) {
+  function updateForm(formData: FormData) {
     if (cart.length) {
-      dispath({
-        type: 'UPDATE_FORM',
-        payload: {
-          ...data
-        }
-      });
+      dispath(updateFormAction(formData));
 
-      localStorage.setItem('@coffee-delivery:form-data', JSON.stringify(data));
+      localStorage.setItem('@coffee-delivery:form-data', JSON.stringify(formData));
       
-      navigate('/success');
+      navigate(`/success/${price.totalPrice}`);
     } else {
       alert('Selecione algum café');
     }

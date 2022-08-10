@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react';
 
 import { OrderCartContext } from '../../../../contexts/OrderCartContext';
@@ -11,7 +12,8 @@ import {
 } from './styles';
 
 export function OrderInfo() {
-  const { form, price } = useContext(OrderCartContext);
+  const { form } = useContext(OrderCartContext);
+  const { price } = useParams();
 
   function paymentFormatted() {
     switch (form.payment) {
@@ -28,7 +30,7 @@ export function OrderInfo() {
 
   const formattedTotalPrice = new Intl.NumberFormat(
     'pt-BR', { style: 'currency', currency: 'BRL' }
-  ).format(price.totalPrice);
+  ).format(Number(price));
 
   return (
     <OrderInfoContainer>
