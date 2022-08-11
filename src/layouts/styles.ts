@@ -1,6 +1,3 @@
 import styled from 'styled-components';
 
-export const LayoutContainer = styled.div`
-  max-width: 1120px;
-  margin-inline: auto;
-`;
+export const LayoutContainer = styled.div``;

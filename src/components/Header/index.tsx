@@ -4,7 +4,7 @@ import { MapPin, ShoppingCart } from 'phosphor-react';
 
 import { OrderCartContext } from '../../contexts/OrderCartContext';
 
-import { HeaderContainer, Location, Card } from './styles';
+import { Background, HeaderContainer, Location, Card } from './styles';
 
 import logoImg from '../../assets/logo.svg';
 
@@ -24,28 +24,30 @@ export function Header() {
   }  
 
   return (
-    <HeaderContainer>
-        <NavLink to="/">
-          <img src={logoImg} alt="Logo Coffee Delivery" />
-        </NavLink>
+    <Background>
+      <HeaderContainer>
+          <NavLink to="/">
+            <img src={logoImg} alt="Logo Coffee Delivery" />
+          </NavLink>
 
-        <div className="this">
-          <Location>
-            <MapPin weight="fill" size={22} />
-            {
-              form.city &&
-              location
-            }
-          </Location>
+          <div className="this">
+            <Location>
+              <MapPin weight="fill" size={22} />
+              {
+                form.city &&
+                location
+              }
+            </Location>
 
-          <Card onClick={handleRedirect} >
-            { !!coffeeQuantity &&
-              <span>{coffeeQuantity}</span>
-            }
-            <ShoppingCart weight="fill" size={22}/>
-          </Card>
+            <Card onClick={handleRedirect} >
+              { !!coffeeQuantity &&
+                <span>{coffeeQuantity}</span>
+              }
+              <ShoppingCart weight="fill" size={22}/>
+            </Card>
 
-      </div>
-    </HeaderContainer>
+        </div>
+      </HeaderContainer>
+    </Background>
   );
 }
