@@ -1,18 +1,20 @@
 import styled from 'styled-components';
 
 export const PaymentCardContainer = styled.div`
+  max-width: 640px;
   padding: 2.5rem;
 
   border-radius: 6px;
   background: ${props => props.theme['base-card']};
 
-  max-width: 640px;
+  @media(max-width: 768px) {
+    margin-inline: auto;
+  }
 `;
 
 export const Title = styled.div`
   display: flex;
   gap: .5rem;
-  
   margin-bottom: 2rem;
   
   color: ${props => props.theme['purple']};
@@ -33,6 +35,10 @@ export const Title = styled.div`
 export const Form = styled.div`
   display: flex;
   gap: .75rem;
+
+  @media(max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Select = styled.label`
@@ -58,13 +64,11 @@ export const Select = styled.label`
     display: flex;
     align-items: center;
     gap: .75rem;
-    
     padding-block: 1rem;
     padding-inline-start: 1rem;
     
     border-radius: 6px;
     border: 1px solid transparent;
-
     font-size: .75rem;
     text-transform: uppercase;    
     background: ${props => props.theme['base-button']};

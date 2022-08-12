@@ -5,6 +5,7 @@ export const Background = styled.div`
   justify-content: center;
   position: fixed;
   width: 100%;
+  z-index: 100;
   
   background: ${props => props.theme['background']};
 `;
@@ -16,7 +17,6 @@ export const HeaderContainer = styled.header`
   gap: 1rem;
   width: 1120px;
   height: 6rem;
-  z-index: 100;
 
   @media(max-width: 1120px) {
     width: 100%;

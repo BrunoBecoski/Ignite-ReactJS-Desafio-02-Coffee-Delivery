@@ -41,7 +41,10 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
     <CoffeeSelectedContainer>
       <img src={coffee.img} />
       <Details>
-        <span>{coffee.name}</span>
+        <div>
+          <span>{coffee.name}</span>
+          <span>{formatPrice}</span>
+        </div>
 
         <Actions>
           <CardCounter>
@@ -63,7 +66,6 @@ export function CoffeeSelected({ coffee }: CoffeeSelectedProps) {
         </Actions>
       </Details>
 
-      <span>{formatPrice}</span>
     </CoffeeSelectedContainer>
   );
 }

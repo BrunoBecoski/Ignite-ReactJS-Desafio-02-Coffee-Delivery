@@ -6,30 +6,43 @@ export const CoffeeSelectedContainer = styled.div`
   }
 
   display: flex;
-
+  justify-content: space-between;  
   padding: .5rem .25rem;
   padding-bottom: 1.5rem;
   
   border-bottom: 1px solid ${props => props.theme['base-button']};
 
   img {
+    object-fit: contain;
     width: 64px;
     margin-right: 1.25rem;
-  }
-
-  > span {
-    font-weight: 700;
-    margin-left: 3.125rem;
   }
 `;
 
 export const Details = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: .5rem;
 
-  > span {
-    color: ${props => props.theme['base-subtitle']};
+  > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    gap: .5rem;
+
+    span:first-child {
+      color: ${props => props.theme['base-subtitle']};
+    }
+
+    span:last-child {
+      margin-left: 3.125rem;
+
+      font-weight: 700;
+    
+      @media(max-width: 768px) {
+        margin-left: 0;
+      }
+
+    }
   }
 `;
 
@@ -41,9 +54,8 @@ export const Actions = styled.div`
     display: flex;
     align-items: center;
     gap: .25rem;
- 
     padding: .375rem .5rem;
-   
+
     border: none;
     border-radius: 6px;
     font-size: .75rem;
@@ -79,7 +91,6 @@ export const CardCounter = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 2.375rem;
     height: 2.375rem;
 

@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const AddressCardContainer = styled.div`
+  max-width: 640px;
   margin-bottom: .75rem;
   padding: 2.5rem;
 
   border-radius: 6px;
   background: ${props => props.theme['base-card']};
 
-  max-width: 640px;
+  @media(max-width: 768px) {
+    margin-inline: auto;
+  }
 `;
 
 export const Title = styled.div`
@@ -67,18 +70,32 @@ export const Form = styled.div`
   grid-template-areas:
     "postal_code postal_code postal_code . . . . ."
     "street_name street_name street_name street_name street_name street_name street_name street_name"
-    "number number number complement complement  complement complement complement"
+    "number number number complement complement complement complement complement"
     "neighborhood neighborhood neighborhood city city city city state"
   ;
+
+  @media(max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: repeat(7, 1fr);
+    grid-template-areas:
+      "postal_code"
+      "street_name"
+      "number"
+      "complement"
+      "neighborhood"
+      "city"
+      "state"
+    ;
+  }
+
 `;
 
 export const Label = styled.label`
-  padding: .75rem;
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: .75rem;
+  position: relative;
 
   border-radius: 4px;
   font-size: .875rem;
@@ -91,10 +108,11 @@ export const Label = styled.label`
   }
 
   span {
-    color: ${props => props.theme['base-label']};
     position: absolute;
-    font-style: italic;
     right: .75rem;
+
+    color: ${props => props.theme['base-label']};
+    font-style: italic;
     font-size: .75rem;
   }
 
@@ -109,7 +127,6 @@ export const Label = styled.label`
     border: none;
     background: none;
     outline: none;
-
     color: ${props => props.theme['base-text']};
 
     ::placeholder {
