@@ -11,7 +11,6 @@ export const OrderInfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    
     padding: 2.5rem;
     
     border-radius: .375rem 2.25rem; 
@@ -22,13 +21,13 @@ export const OrderInfoContainer = styled.div`
 export const AddressInfo = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: .75rem;
 
   div:first-child {
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 2rem;
     height: 2rem;
     border-radius: 50%; 
@@ -42,8 +41,10 @@ export const AddressInfo = styled.div`
   }
 
   div:last-child {
+    flex: 1;
+
     p {
-      display: inline;;
+      display: inline;
     }
 
     span {
@@ -61,7 +62,6 @@ export const DeliveryInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
@@ -72,6 +72,10 @@ export const DeliveryInfo = styled.div`
     svg {
       font-size: 1rem;
     }
+  }
+
+  div:last-child {
+    flex: 1;
   }
 `;
 
@@ -84,7 +88,6 @@ export const PaymentInfo = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
     width: 2rem;
     height: 2rem;
     border-radius: 50%; 
@@ -95,5 +98,9 @@ export const PaymentInfo = styled.div`
     svg {
       font-size: 1rem;
     }
+  }
+
+  div:last-child {
+    flex: 1;
   }
 `;

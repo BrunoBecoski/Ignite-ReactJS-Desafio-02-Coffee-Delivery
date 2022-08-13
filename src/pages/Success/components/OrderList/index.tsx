@@ -41,7 +41,7 @@ export function OrderInfo() {
           </div>
           <div>
             <p>Entrega em </p>
-            <strong>Rua {form.street_name}, {form.number}</strong>
+            <strong>{form.street_name}, {form.number}</strong>
             <span>{form.neighborhood} - {form.city}, {form.state}</span>
           </div>
         </AddressInfo>
