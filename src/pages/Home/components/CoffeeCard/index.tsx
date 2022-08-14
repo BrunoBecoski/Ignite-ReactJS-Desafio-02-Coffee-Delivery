@@ -15,9 +15,10 @@ import {
 
 interface CoffeeCardProps {
   coffee: CoffeeInfo;
+  selected: boolean;
 }
 
-export function CoffeeCard({ coffee }: CoffeeCardProps) {
+export function CoffeeCard({ coffee, selected }: CoffeeCardProps) {
   const { addCoffee } = useContext(OrderCartContext);
 
   const [quantity, setQuantity] = useState(1);
@@ -46,7 +47,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
   }
 
   return (
-    <CoffeeCardContainer>
+    <CoffeeCardContainer selected={selected}>
       <img src={coffee.img} />
 
       <CardTags>

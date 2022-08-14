@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const CoffeeCardContainer = styled.div`
+interface CoffeeCardContainerProps {
+  selected: boolean;
+}
+
+export const CoffeeCardContainer = styled.div<CoffeeCardContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +12,11 @@ export const CoffeeCardContainer = styled.div`
   padding: 0 1.25rem 1.25rem;
 
   border-radius: 6px 36px;
-  background: ${props => props.theme['base-card']};
+
+  background: ${(props) => props.selected 
+    ? props.theme['purple-light'] 
+    : props.theme['base-card']
+  };
 
   img {
     width: 120px;
