@@ -43,8 +43,9 @@ export const Form = styled.div`
 
 export const Select = styled.label`
   width: 100%;
-
   cursor: pointer;
+
+  color: ${props => props.theme['base-title']};
   
   :hover div{
     color: ${props => props.theme['base-subtitle']};
@@ -56,6 +57,7 @@ export const Select = styled.label`
   }
 
   input:checked ~ div {
+    color: ${props => props.theme['black']};
     border-color: ${props => props.theme['purple']};
     background: ${props => props.theme['purple-light']};
   }

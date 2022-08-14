@@ -14,7 +14,7 @@ export const CoffeeCardContainer = styled.div<CoffeeCardContainerProps>`
   border-radius: 6px 36px;
 
   background: ${(props) => props.selected 
-    ? props.theme['purple-light'] 
+    ? props.theme['base-hover'] 
     : props.theme['base-card']
   };
 
@@ -92,7 +92,7 @@ export const CardActions = styled.div`
     
     border: none;
     border-radius: 6px;
-    color: ${props => props.theme['base-card']};
+    color: ${props => props.theme['white']};
     background: ${props => props.theme['purple-dark']};
     transition: background .2s;
 

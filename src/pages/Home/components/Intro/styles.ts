@@ -89,7 +89,7 @@ const BaseItem = styled.div`
 
     padding: 8px;
     border-radius: 50%;
-    color: ${props => props.theme['background']};
+    color: ${props => props.theme['white']};
   }
 `;
 
@@ -101,7 +101,7 @@ export const ItemCard = styled(BaseItem)`
 
 export const ItemPackage = styled(BaseItem)`
   span {
-    background: ${props => props.theme['base-text']};
+    background: ${props => props.theme['purple-dark']};
   }
 `;
 

@@ -27,14 +27,29 @@ export const HeaderContainer = styled.header`
     height: 5rem;
   }
 
-  div {
+  > div {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: .75rem;
   }
 
-  img {
+  a {
+    .logoText {
+      fill: ${props => props.theme['base-title']};
+    }
     height: 2.5rem;
   }
+`;
+
+export const ButtonTheme = styled.button`
+  display: flex;
+  padding: .5rem;
+
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  color: ${props => props.theme['base-title']};
 `;
 
 export const Location = styled.div`
