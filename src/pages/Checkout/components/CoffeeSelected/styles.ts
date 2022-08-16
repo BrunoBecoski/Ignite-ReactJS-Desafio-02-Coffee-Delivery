@@ -23,6 +23,7 @@ export const Details = styled.div`
   display: flex;
   flex-direction: column;
   gap: .5rem;
+  width: 100%;
 
   > div:first-child {
     display: flex;
